@@ -11,12 +11,31 @@ import {
 import { Input } from "@/components/ui/input"
 import {Mail} from "lucide-react";
 import * as React from "react";
+import {useKeyboardNavigation} from "@/app/hooks/useKeyboardNavigation";
 
-export function AnnoucementDialog() {
+interface ButtonProps {
+    selected: boolean,
+    setSelected: Function,
+    index: number,
+}
+
+export function AnnoucementDialog(props: ButtonProps) {
+    let trigger= React.useRef<HTMLButtonElement>(null);
+
+    const handleEnter = () => {
+        if (!props.selected) return;
+        trigger.current?.click();
+    };
+
+    useKeyboardNavigation({
+        onEnterDown: handleEnter,
+        disableOnFocused: false,
+    });
+
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="ghost" className="w-56" style={{justifyContent: "left"}} >
+                <Button variant={props.selected ? "secondary" : "ghost"} ref={trigger} className="w-full justify-start" style={{justifyContent: "left"}}>
                     <Mail className="mr-2 h-4 w-4" />Send Announcement</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">

@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import {Button} from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import MainList from "@/app/pages/MainList";
 import {PlayerList} from "@/app/pages/PlayerList";
@@ -15,6 +15,8 @@ import {IframeTesting} from "@/app/pages/IframeTesting";
 import Image from "next/image";
 import * as React from "react";
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend} from 'recharts';
+import {AnnoucementDialog} from "@/app/pages/AnnoucementDialog";
+import {MainListItem} from "@/app/pages/MainListItem";
 
 const data = [
     {
@@ -47,58 +49,61 @@ const data = [
     },
 ];
 
-
+const menuItems = ["Main", "Players", "txAdmin"]
 export default function Home() {
     const [HideIframe, setHideIframe] = React.useState(true)
     const [HidePlayerList, setHidePlayerList] = React.useState(true)
-    
+    const [selectedMenu, setSelectedMenu] = React.useState(0)
+
+    function HandleMenuChange(index: number) {
+        setSelectedMenu(index)
+
+        switch (index) {
+            case 1:
+                setHideIframe(true)
+                setHidePlayerList(false)
+                break;
+            case 2:
+                setHidePlayerList(true)
+                setHideIframe(false)
+                break;
+            default:
+                setHideIframe(true)
+                setHidePlayerList(true)
+                break;
+        }
+    }
+
       return (
           <>
               <div className="flex flex-row gap-3">
                   <Card className="w-[300px] bg-background" style={{marginTop: "15px", marginLeft: "10px"}}>
-                      <CardHeader>
+                      <CardHeader style={{padding: "1rem"}}>
                           <CardTitle>
                               <Image
                                   src="/txadmin.png"
-                                  width={170}
+                                  width={190}
                                   height={100}
                                   style={{marginLeft: "40px"}}
                                   alt="Picture of the author"
                               />
                           </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                          <Tabs defaultValue="main" className="w-[400px]">
-                              <TabsList className="grid w-64 grid-cols-3 bg-secondary">
-                                  <TabsTrigger value="main"  onClick={function() {
-                                      setHideIframe(true)
-                                      setHidePlayerList(true)
-                                      return
-                                  }}>
-                                      Main
-                                  </TabsTrigger>
-                                  <TabsTrigger value="players" onClick={function() {
-                                      setHideIframe(true)
-                                      setHidePlayerList(false)
-                                      return
-                                  }}>
-                                      Players
-                                  </TabsTrigger>
-                                  <TabsTrigger value="tx" onClick={function() {
-                                      setHidePlayerList(true)
-                                      setHideIframe(false)
-                                      return
-                                  }}>
-                                      txAdmin
-                                  </TabsTrigger>
-                              </TabsList>
-                              <TabsContent value="main">
-                                    <MainList />
-                              </TabsContent>
-                              <TabsContent value="players"></TabsContent>
-                              <TabsContent value="tx">
-                              </TabsContent>
-                          </Tabs>
+                      <CardContent style={{paddingLeft: "15px", paddingBottom: "15px"}}>
+                              <div className="flex flex-col" style={{justifyContent: "left", alignContent: "left"}}>
+                                  <div className="space-x-4 flex flex-row">
+                                          {menuItems.map((menu, index) => (
+                                           <div key={menu}>
+                                               <Button key={index} variant={selectedMenu == index ? "secondary" : "ghost"}
+                                                       className="w-full justify-start"
+                                                       onClick={() => HandleMenuChange(index)}>
+                                                   <p style={{fontSize: "15px"}}>{menu}</p>
+                                               </Button>
+                                           </div>
+                                          ))}
+                                  </div>
+                                  {selectedMenu == 0 ? <><MainList/> </> : <> </>}
+                            </div>
                       </CardContent>
                   </Card>
                   <Card className="w-[300px] bg-background" style={{marginTop: "15px", marginLeft: "66%", height: "150px"}} hidden={HidePlayerList && HideIframe}>

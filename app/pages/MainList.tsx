@@ -3,85 +3,89 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent} from "@/components/ui/card";
 import {BookmarkIcon, CarIcon, GroupIcon, HeartPulseIcon, Mail, MoveIcon, TimerResetIcon} from "lucide-react";
 import {AnnoucementDialog} from "@/app/pages/AnnoucementDialog";
+import {ReactElement} from "react";
+import {useKeyboardNavigation} from "@/app/hooks/useKeyboardNavigation";
+import {MainListItem} from "@/app/pages/MainListItem";
 
-const Modes = ["Normal", "Noclip", "Godmode", "Super Jump"]
-const vehicleModes = ["Spawn", "Repair", "Delete", "Boost"]
-const teleportModes = ["Teleport", "Coords", "Back", "Copy Coords"]
-const healModes = ["Myself", "Everyone"]
+export interface ButtonProps {
+    name: string;
+    options: string[] | undefined;
+    icon: ReactElement;
+}
+
+let Buttons: ButtonProps[] = [
+    {
+        name: "Player Mode",
+        icon: <MoveIcon className="mr-2 h-5 w-4" />,
+        options: ["Normal", "Noclip", "Godmode", "Super Jump"],
+    },
+    {
+        name: "Teleport",
+        icon: <BookmarkIcon className="mr-2 h-5 w-4" />,
+        options: [" Waypoint", " Coords", " Back", " Copy Coords"],
+    },
+    {
+        name: "Vehicle",
+        icon: <CarIcon className="mr-2 h-5 w-4" />,
+        options: ["Spawn", "Repair", "Delete", "Boost"],
+    },
+    {
+        name: "Heal",
+        icon: <HeartPulseIcon className="mr-2 h-5 w-4" />,
+        options: ["Myself", "Everyone"],
+    },
+    {
+        name: "Send Announcement",
+        icon: <Mail className="mr-2 h-5 w-4" />,
+        options: undefined,
+    },
+    {
+        name: "Reset World",
+        icon: <TimerResetIcon className="mr-2 h-5 w-4" />,
+        options: undefined,
+    },
+    {
+        name: "Toggle Player IDs",
+        icon: <GroupIcon className="mr-2 h-5 w-4" />,
+        options: undefined,
+    },
+]
 export default function MainList() {
-    const [selectedMode, setSelectedMode] = React.useState(0)
-    const [SelectedVehcleMode, setSelectedVehcleMode] = React.useState(0)
-    const [selectedTeleportMode, setSelectedTeleportMode] = React.useState(0)
-    const [SelectedHealMode, setSelectedHealMode] = React.useState(0)
+    const [selectedMenu, setSelectedMenu] = React.useState(0)
 
-    function ChangeMode() {
-        if (selectedMode + 1 === Modes.length) {
-            setSelectedMode(0)
-        } else {
-            setSelectedMode(selectedMode + 1)
-        }
-    }
+    const handleArrowDown = React.useCallback(() => {
+        const next = selectedMenu + 1;
+        setSelectedMenu(next >= Buttons.length ? 0 : next);
+    }, [selectedMenu]);
 
-    function ChangeVehicleMode() {
-        if (SelectedVehcleMode + 1 === vehicleModes.length) {
-            setSelectedVehcleMode(0)
-        } else {
-            setSelectedVehcleMode(SelectedVehcleMode + 1)
-        }
-    }
+    const handleArrowUp =  React.useCallback(() => {
+        const next = selectedMenu - 1;
+        setSelectedMenu(next < 0 ? Buttons.length - 1 : next);
+    }, [selectedMenu]);
 
-    function ChangeTeleportMode() {
-        if (selectedTeleportMode + 1 === teleportModes.length) {
-            setSelectedTeleportMode(0)
-        } else {
-            setSelectedTeleportMode(selectedTeleportMode + 1)
-        }
-    }
 
-    function ChangeHealMode() {
-        if (SelectedHealMode + 1 === healModes.length) {
-            setSelectedHealMode(0)
-        } else {
-            setSelectedHealMode(SelectedHealMode + 1)
-        }
-    }
+    useKeyboardNavigation({
+        onDownDown: handleArrowDown,
+        onUpDown: handleArrowUp,
+        disableOnFocused: false,
+    });
 
     return (
-        <Card className="w-[250px]">
-            <CardContent className="bg-origin-content" style={{marginTop: "5px", marginBottom: "5px", paddingLeft: "5px"}}>
+        <Card className="w-[270px] mt-2">
+            <CardContent className="bg-origin-content" style={{marginTop: "5px", paddingLeft: "5px", paddingBottom: "5px"}}>
                 <div className="grid w-full items-center gap-4">
-                    <div className="flex flex-col space-y-1.5 h-5">
-                        <Button variant="ghost" className="w-56 alig" style={{justifyContent: "left"}} onClick={ChangeMode} >
-                            <MoveIcon className="mr-2 h-4 w-4" />Player Mode: <p className="font-extralight" style={{marginLeft: "5px"}}> {Modes[selectedMode]}</p>
-                        </Button>
+                    <div className="inline-grid grid-flow-col-dense" style={{justifyContent: "left", alignContent: "left"}}>
+                        <div style={{width: "255px"}}>
+                            <div className="space-y-0.5">
+                                {Buttons.map((menu, index) => (
+                                        menu.name == "Send Announcement" ?
+                                            <AnnoucementDialog key={index} selected={selectedMenu == index} setSelected={setSelectedMenu} index={index}/> :
+                                            <MainListItem key={index} menu={menu} selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} index={index}/>
+                                ))}
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex flex-col space-y-1 h-5">
-                        <Button variant="ghost" className="w-56" style={{justifyContent: "left"}} onClick={ChangeTeleportMode}>
-                            <BookmarkIcon className="mr-2 h-4 w-4" />Teleport: <p className="font-extralight" style={{marginLeft: "5px"}}> {teleportModes[selectedTeleportMode]}</p>
-                        </Button>
-                    </div>
-                    <div className="flex flex-col space-y-1 h-5">
-                        <Button variant="ghost" className="w-56" style={{justifyContent: "left"}} onClick={ChangeVehicleMode}>
-                            <CarIcon className="mr-2 h-4 w-4" />Vehicle: <p className="font-extralight" style={{marginLeft: "5px"}}> {vehicleModes[SelectedVehcleMode]}</p>
-                        </Button>
-                    </div>
-                    <div className="flex flex-col space-y-1 h-5">
-                        <Button variant="ghost" className="w-56" style={{justifyContent: "left"}} onClick={ChangeHealMode}>
-                            <HeartPulseIcon className="mr-2 h-4 w-4" /> Heal: <p className="font-extralight"  style={{marginLeft: "5px"}}> {healModes[SelectedHealMode]}</p>
-                        </Button>
-                    </div>
-                    <div className="flex flex-col space-y-1 h-5">
-                        <AnnoucementDialog />
-                    </div>
-                    <div className="flex flex-col space-y-0.5 h-5">
-                        <Button variant="ghost" className="w-56" style={{justifyContent: "left"}}>
-                            <TimerResetIcon className="mr-2 h-4 w-4" />Reset World</Button>
-                    </div>
-                    <div className="flex flex-col space-y-1 h-5">
-                        <Button variant="ghost" className="w-56" style={{justifyContent: "left"}}>
-                            <GroupIcon className="mr-2 h-4 w-4" />Toggle Player IDs</Button>
-                    </div>
-                </div>
             </CardContent>
         </Card>
     );
