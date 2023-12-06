@@ -323,6 +323,17 @@
                                                     ]
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "Input.Toggle",
+                                                    "title": "Test Switch",
+                                                    "id": "test"
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

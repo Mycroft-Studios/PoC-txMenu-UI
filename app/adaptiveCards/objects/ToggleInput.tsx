@@ -29,6 +29,7 @@ export class ToggleInput extends AC.ToggleInput {
             <Switch
                 label={this.title}
                 onChangeHandler={(e: any) => this.onChange(e)}
+                id={this.id}
             />
     );
   }

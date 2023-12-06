@@ -1,26 +1,21 @@
 import * as React from "react";
-import {Switch, styled, FormControlLabel} from "@mui/material";
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 const SwitchWithLabel = (props: any) => {
-  const { onChangeHandler } = props;
-  const [value, setValue] = React.useState("false");
+  const { onChangeHandler, label, id } = props;
+  const [value, setValue] = React.useState("off");
   const handleChange = (e: any) => {
     const newValue = e.target.value;
     setValue(newValue);
     if (onChangeHandler) onChangeHandler(newValue);
   };
   return (
-    <FormControlLabel
-      {...props}
-      sx={
-        {mt: 1.25}
-      }
-      labelPlacement="start"
-      control={<Switch color="primary" value={value} onChange={handleChange} />}
-    />
+      <div className="flex flex-row items-center space-x-2 justify-center mt-2">
+        <Switch id={"switch-for-" + id} value={value} onChange={handleChange}/>
+        <Label htmlFor={"switch-for-" + id}>{label}</Label>
+      </div>
   );
 };
 
-export default styled(SwitchWithLabel)`
-  margin-top: 10px;
-`;
+export default SwitchWithLabel;

@@ -1,5 +1,5 @@
 import * as AC from "adaptivecards";
-import Button from "../components/Button";
+import { ACButton} from "@/app/adaptiveCards/components/Button";
 import { reactDomRender } from "./render";
 
 export class ToggleVisibilityAction extends AC.ToggleVisibilityAction {
@@ -37,7 +37,7 @@ export class ToggleVisibilityAction extends AC.ToggleVisibilityAction {
         case "destructive":
             return "error";
         default:
-            return "primary";
+            return "outline";
     }
   }
 
@@ -48,6 +48,6 @@ export class ToggleVisibilityAction extends AC.ToggleVisibilityAction {
 
   private renderElement = (): JSX.Element => {
     // TODO: Based on the style of button (i.e. positive/destuctive) may need to render differently
-    return <Button label={this.title} disabled={!this.isEnabled} color={this.getColourValue()} onClick={() => this.execute()} />
+    return <ACButton label={this.title} disabled={!this.isEnabled} color={this.getColourValue()} onClick={() => this.execute()} />
   };
 }
