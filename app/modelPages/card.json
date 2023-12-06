@@ -1,0 +1,525 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "Medium",
+            "weight": "Bolder",
+            "text": "### ESX Framework (${currentpage.Name})",
+            "wrap": true,
+            "spacing": "Small"
+        },
+        {
+            "type": "TextBlock",
+            "weight": "Bolder",
+            "text": "### ${name}",
+            "wrap": true,
+            "horizontalAlignment": "Left",
+            "size": "Medium",
+            "spacing": "Small"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "FactSet",
+                                    "facts": [
+                                        {
+                                            "title": "Group",
+                                            "value": "${group}"
+                                        },
+                                        {
+                                            "title": "Character ID",
+                                            "value": "${charID}"
+                                        },
+                                        {
+                                            "title": "Identifier",
+                                            "value": "${license}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "Input.Text",
+                                                    "placeholder": "User",
+                                                    "label": "Group Name",
+                                                    "value": "user",
+                                                    "regex": "^[a-z]+$",
+                                                    "id": "groupName"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Set Group",
+                                                            "id": "SetGroup",
+                                                            "verb": "SetGroup"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "Input.Number",
+                                                    "placeholder": "24",
+                                                    "id": "MaxWeight",
+                                                    "label": "Max Weight (kg)",
+                                                    "value": 24
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Set Max Weight",
+                                                            "verb": "SetMaxWeight"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "horizontalAlignment": "Left",
+                    "height": "stretch",
+                    "id": "CharacterInfo"
+                }
+            ],
+            "$when": "${currentpage.index == 1}"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "FactSet",
+                                    "facts": [
+                                        {
+                                            "title": "Job Name",
+                                            "value": "${job.label}"
+                                        },
+                                        {
+                                            "title": "Job Rank",
+                                            "value": "${job.grade.label} (${job.grade.rank})"
+                                        },
+                                        {
+                                            "title": "Job Salary",
+                                            "value": "${job.grade.salary}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "Input.Text",
+                                                    "placeholder": "unemployed",
+                                                    "label": "Job Name",
+                                                    "id": "JobName",
+                                                    "regex": "^[a-z0-9]+$"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "Input.Number",
+                                                    "placeholder": "1",
+                                                    "id": "JobGrade",
+                                                    "label": "Job Grade",
+                                                    "value": 1
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "stretch",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Set Job",
+                                                            "verb": "SetJob",
+                                                            "tooltip": "Set Player Job",
+                                                            "associatedInputs": "auto"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "$when": "${currentpage.index == 2}"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "FactSet",
+                    "facts": [
+                        {
+                            "title": "Money",
+                            "value": "${accounts.money}"
+                        },
+                        {
+                            "title": "Bank",
+                            "value": "${accounts.bank}"
+                        },
+                        {
+                            "title": "Dirty Money",
+                            "value": "${accounts.dirty}"
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.ChoiceSet",
+                                    "choices": [
+                                        {
+                                            "title": "Money",
+                                            "value": "money"
+                                        },
+                                        {
+                                            "title": "Bank",
+                                            "value": "bank"
+                                        },
+                                        {
+                                            "title": "Dirty Money",
+                                            "value": "black_money"
+                                        }
+                                    ],
+                                    "placeholder": "Account",
+                                    "label": "Select Account",
+                                    "id": "Account"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.Number",
+                                    "placeholder": "1",
+                                    "id": "Amount",
+                                    "label": "Amount",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.ChoiceSet",
+                                    "choices": [
+                                        {
+                                            "title": "Add",
+                                            "value": "add"
+                                        },
+                                        {
+                                            "title": "Set",
+                                            "value": "set"
+                                        },
+                                        {
+                                            "title": "Remove",
+                                            "value": "remove"
+                                        }
+                                    ],
+                                    "placeholder": "Action",
+                                    "label": "Action",
+                                    "id": "Action"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Execute",
+                                                            "verb": "executeM"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "$when": "${currentpage.index == 3}"
+                }
+            ],
+            "$when": "${currentpage.index == 3}"
+        },
+        {
+            "type": "Container",
+            "$when": "${currentpage.index == 4}",
+            "items": [
+                {
+                    "type": "FactSet",
+                    "facts": [
+                        {
+                            "title": "Item Count",
+                            "value": "${plyitems.count}"
+                        },
+                        {
+                            "title": "Weight",
+                            "value": "${weight} / ${maxWeight}"
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.Text",
+                                    "placeholder": "bread",
+                                    "id": "ItemName",
+                                    "label": "Item Name"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.Number",
+                                    "placeholder": "1",
+                                    "id": "ItemCount",
+                                    "label": "Item Count",
+                                    "value": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Add",
+                                                            "id": "AddIt",
+                                                            "verb": "AddItem"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Remove",
+                                                            "style": "destructive"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.ToggleVisibility",
+                                                            "title": "View Items",
+                                                            "targetElements": ["ItemList"]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Previous",
+                                                            "verb": "LastPage",
+                                                            "isEnabled": "${currentpage.index > 1}",
+                                                            "style": "destructive"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "ActionSet",
+                                                    "actions": [
+                                                        {
+                                                            "type": "Action.Execute",
+                                                            "title": "Next",
+                                                            "verb": "NextPage",
+                                                            "isEnabled": "${currentpage.index < PageCount}"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "horizontalAlignment": "Left"
+                },
+                {
+                    "type": "TextBlock",
+                    "$data": "${plyitems.itemlist}",
+                    "id": "ItemList",
+                    "isVisible": false,
+                    "text": "**${name}**: ${count}"
+                }
+            ],
+            "verticalContentAlignment": "Bottom",
+            "rtl": false
+        }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6"
+}

@@ -50,8 +50,9 @@ let Buttons: ButtonProps[] = [
         options: undefined,
     },
 ]
+
 export default function MainList() {
-    const [selectedMenu, setSelectedMenu] = React.useState(0)
+    const [selectedMenu, setSelectedMenu] = React.useState(0);
 
     const handleArrowDown = React.useCallback(() => {
         const next = selectedMenu + 1;

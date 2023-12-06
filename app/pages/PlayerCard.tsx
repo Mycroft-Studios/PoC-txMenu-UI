@@ -9,10 +9,9 @@ import * as React from "react";
 function getIndicatorColor(health: number) {
    if (health > 75) {
        return "#51e47a"
-   }
-    else if (health > 45) {
+   } else if (health > 45) {
         return "#e8c957"
-    } else {
+   } else {
         return "#f86565"
    }
 }

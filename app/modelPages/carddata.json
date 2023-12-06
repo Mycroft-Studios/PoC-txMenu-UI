@@ -1,0 +1,16 @@
+{
+  "group": "admin",
+    "name": "Mycroft",
+    "license": "11111",
+    "charid": "1",
+    "currentpage": {
+        "index": 3,
+        "name": "Homepage"
+    },
+    "accounts": {
+      "money": "$100",
+      "bank": "$1000",
+      "dirty": "$100"
+    },
+    "PageCount": 4
+}

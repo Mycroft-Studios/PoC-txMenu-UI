@@ -90,8 +90,7 @@ export function PlayerList(props: {Hide: boolean} ) {
                 <div className="flex flex-row gap-6 flex-wrap mt-1 ml-4">
                     {Players.map((player: PlayerDetails) => (
                         <PlayerModel key={player.id} Player={player}/>
-                    ))
-                    }
+                    ))}
                 </div>
             </CardContent>
         </Card>

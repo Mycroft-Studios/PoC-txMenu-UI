@@ -17,6 +17,7 @@ import {PlayerDetails} from "@/app/pages/PlayerList";
 import {ZapIcon, InfoIcon, ListIcon, HistoryIcon, BanIcon} from "lucide-react";
 
 const Menus = ["Actions", "Info", "IDs", "History", "Ban"]
+const CustomMenus = ["Adaptive"]
 
 function getIconForMenu(menu: string) {
     switch (menu) {
@@ -66,6 +67,13 @@ export function PlayerModel(props: {Player: PlayerDetails}) {
                     <div className="px-3 py-2" style={{width: "175px"}}>
                         <div className="space-y-1.5">
                             {Menus.map((menu) => (
+                                <Button key={menu} variant={selectedMenu == menu ? "secondary" : "ghost"} className="w-full justify-start" onClick={() => setSelectedMenu(menu)}>
+                                    {getIconForMenu(menu)}
+                                    <p style={{fontSize: "15px"}}>{menu}</p>
+                                </Button>
+                            ))}
+                            <Separator/>
+                            {CustomMenus.map((menu) => (
                                 <Button key={menu} variant={selectedMenu == menu ? "secondary" : "ghost"} className="w-full justify-start" onClick={() => setSelectedMenu(menu)}>
                                     {getIconForMenu(menu)}
                                     <p style={{fontSize: "15px"}}>{menu}</p>
