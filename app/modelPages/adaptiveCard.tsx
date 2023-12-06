@@ -18,7 +18,7 @@ import { SubmitAction } from "@/app/adaptiveCards/objects/SubmitAction";
 AC.GlobalRegistry.elements.register(ToggleInput.JsonTypeName,ToggleInput);
 AC.GlobalRegistry.elements.register(DateInput.JsonTypeName,DateInput);
 AC.GlobalRegistry.elements.register(ChoiceSetInput.JsonTypeName,ChoiceSetInput);
-// AC.GlobalRegistry.actions.register(ToggleVisibilityAction.JsonTypeName, ToggleVisibilityAction);
+AC.GlobalRegistry.actions.register(ToggleVisibilityAction.JsonTypeName, ToggleVisibilityAction);
 AC.GlobalRegistry.actions.register(ExecuteAction.JsonTypeName, ExecuteAction);
 AC.GlobalRegistry.actions.register(SubmitAction.JsonTypeName, SubmitAction);
 AC.GlobalRegistry.elements.register(TextInput.JsonTypeName, TextInput);
