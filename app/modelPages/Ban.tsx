@@ -49,7 +49,7 @@ export function Ban() {
                 </Select>
                 <div className="flex flex-row" style={{marginTop: "5px", display: show ? "block": "none"}}>
                     <div className="flex flex-row space-x-2" style={{marginTop: "5px"}}>
-                        <Input id="hours" placeholder="" type="number" className="w-[150px]" min={1} value={1}/>
+                        <Input id="hours" type="number" className="w-[150px]"/>
                         <Select>
                             <SelectTrigger className="w-[150px]" id="more_duration">
                                 <SelectValue placeholder="Hours" />
