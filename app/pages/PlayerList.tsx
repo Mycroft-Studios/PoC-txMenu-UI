@@ -2,6 +2,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {Input} from "@/components/ui/input";
 import * as React from "react";
 import {PlayerModel} from "@/app/pages/PlayerModel";
+
 import {
     Select,
     SelectContent,
@@ -10,6 +11,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import {Label} from "@/components/ui/label";
+
 export interface PlayerDetails {
     name: string;
     id: string;
@@ -56,6 +58,10 @@ const Players: PlayerDetails[] = [
     },
 ]
 export function PlayerList(props: {Hide: boolean} ) {
+
+    function select(Player: PlayerDetails, selected: string) {
+        return <PlayerModel Player={Player} Page={selected}/>
+    }
     return (
         <Card className="bg-background" style={{width: "98%", height: "740px", margin: "20px", marginTop: "5px", marginLeft: "10px"}} hidden={props.Hide}>
             <CardHeader>
@@ -89,7 +95,7 @@ export function PlayerList(props: {Hide: boolean} ) {
             <CardContent className="bg-background p-5 pt-0" style={{width: "100%", height: "100%"}}>
                 <div className="flex flex-row gap-6 flex-wrap mt-1 ml-4">
                     {Players.map((player: PlayerDetails) => (
-                        <PlayerModel key={player.id} Player={player}/>
+                        <PlayerModel key={player.id} Player={player} Page={"Actions"}/>
                     ))}
                 </div>
             </CardContent>

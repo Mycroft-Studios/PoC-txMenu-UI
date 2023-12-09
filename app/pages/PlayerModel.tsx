@@ -49,10 +49,14 @@ function getIconForMenu(menu: string) {
 }
 
 
-export function PlayerModel(props: {Player: PlayerDetails}) {
+export function PlayerModel(props: {Player: PlayerDetails, Page: string}) {
     const [selectedMenu, setSelectedMenu] = React.useState("Actions")
     return (
-        <Dialog>
+        <Dialog onOpenChange={(open) => {
+            if (open) {
+                setSelectedMenu(props.Page)
+            }
+        }}>
             <DialogTrigger asChild>
                 <Button className="hover:bg-card hover:text-primary" variant="outline" style={{padding: "8px", width: "340px", height: "75px", justifyContent: "left"}}>
                     <PlayerCard Player={props.Player}/>
