@@ -21,7 +21,7 @@ const cards: HistoryCardProps[] = [
         type: "WARNED"
     },
 ];
-export function History(props: HistoryCardProps) {
+export function History() {
     return (
         <div>
             <p className="text-xl">Related History</p>
