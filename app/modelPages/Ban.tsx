@@ -11,6 +11,10 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 
+const DurationOptions = ["2 Hours", "8 Hours", "1 Day", "2 Days", "1 Week", "2 Weeks", "Permanent", "Custom"]
+const DurationValues = ["2h", "8h", "1d", "2d", "1w", "2w", "perm", "custom"]
+const DurationMoreOptions = ["Minutes", "Hours","Days", "Weeks", "Months", "Years"]
+
 export function Ban() {
     const [show, setShow] = React.useState(false);
     const [currentDuration, setCurrentDuration] = React.useState("2h");
@@ -37,14 +41,11 @@ export function Ban() {
                         <SelectValue placeholder="Select Duration"/>
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="2h">2 Hours</SelectItem>
-                        <SelectItem value="8h">8 Hours</SelectItem>
-                        <SelectItem value="1d">1 Day</SelectItem>
-                        <SelectItem value="2d">2 Days</SelectItem>
-                        <SelectItem value="1w">1 Week</SelectItem>
-                        <SelectItem value="2w">2 Weeks</SelectItem>
-                        <SelectItem value="perm">Permanent</SelectItem>
-                        <SelectItem value="custom">Custom</SelectItem>
+                        {
+                            DurationOptions.map((option, index) => (
+                                <SelectItem key={option} value={DurationValues[index]}>{option}</SelectItem>
+                            ))
+                        }
                     </SelectContent>
                 </Select>
                 <div className="flex flex-row" style={{marginTop: "5px", display: show ? "block": "none"}}>
@@ -55,10 +56,9 @@ export function Ban() {
                                 <SelectValue placeholder="Hours" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="h">Hours</SelectItem>
-                                <SelectItem value="w">Weeks</SelectItem>
-                                <SelectItem value="m">Months</SelectItem>
-                                <SelectItem value="d">Years</SelectItem>
+                                {DurationMoreOptions.map((option) => (
+                                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>
