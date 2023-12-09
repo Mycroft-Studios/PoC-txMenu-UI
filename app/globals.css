@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   /* Default background color of <body />...etc */
   --background: 224 33.3% 97.1%;
