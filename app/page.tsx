@@ -12,6 +12,7 @@ import {PlayerList} from "@/app/pages/PlayerList";
 import {IframeTesting} from "@/app/pages/IframeTesting";
 import Image from "next/image";
 import * as React from "react";
+import {VisibilityProvider} from "@/app/providers/visibilityProvider";
 import {LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend} from 'recharts';
 import {AnnoucementDialog} from "@/app/pages/AnnoucementDialog";
 import {MainListItem} from "@/app/pages/MainListItem";
@@ -73,7 +74,7 @@ export default function Home() {
     }
 
       return (
-          <>
+          <VisibilityProvider>
               <div className="flex flex-row gap-3">
                   <Card className="w-[300px] bg-background" style={{marginTop: "15px", marginLeft: "10px"}}>
                       <CardHeader style={{padding: "1rem"}}>
@@ -119,6 +120,6 @@ export default function Home() {
               </div>
               <PlayerList Hide={HidePlayerList} />
               <IframeTesting Hide={HideIframe} />
-          </>
+          </VisibilityProvider>
   )
 }

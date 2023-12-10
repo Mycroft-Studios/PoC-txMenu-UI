@@ -1,4 +1,4 @@
-import {ProvidesHostConfigContext, AdaptiveCardUsingHostConfigContext } from "adaptivecards-react";
+import { AdaptiveCard } from "adaptivecards-react";
 import * as ACData from "adaptivecards-templating";
 import * as AC from "adaptivecards";
 import React from "react";
@@ -8,7 +8,6 @@ import rawCardData from "./cardData.json";
 import { TextInput } from "@/app/adaptiveCards/objects/TextInput";
 import { NumberInput } from "@/app/adaptiveCards/objects/NumberInput";
 import { ToggleInput } from "@/app/adaptiveCards/objects/ToggleInput";
-import { TimeInput } from "@/app/adaptiveCards/objects/TimeInput";
 import { DateInput } from "@/app/adaptiveCards/objects/DateInput";
 import { ChoiceSetInput } from "@/app/adaptiveCards/objects/ChoiceSetInput";
 import { ToggleVisibilityAction } from "@/app/adaptiveCards/objects/ToggleVisibilityAction";
@@ -24,7 +23,7 @@ AC.GlobalRegistry.actions.register(SubmitAction.JsonTypeName, SubmitAction);
 AC.GlobalRegistry.elements.register(TextInput.JsonTypeName, TextInput);
 AC.GlobalRegistry.elements.register(NumberInput.JsonTypeName, NumberInput);
 
-export function AdaptiveCard() {
+export function AdaptiveCardPage() {
     const [resource, setResource] = React.useState("Mycroft-Studios");
     const template = new ACData.Template(rawCard);
     const context: ACData.IEvaluationContext = {
@@ -37,7 +36,7 @@ export function AdaptiveCard() {
             lineThickness: 2,
             lineColor: "var(--muted-foreground)",
         },
-        "spacing": {
+        spacing: {
             "small": 4,
             "default": 10,
             "medium": 20,
@@ -194,11 +193,10 @@ export function AdaptiveCard() {
             }
         }
     };
+    // @ts-ignore
     return (
         <div className="">
-            <ProvidesHostConfigContext hostConfig={hostConfig}>
-                <AdaptiveCardUsingHostConfigContext payload={card}/>
-            </ProvidesHostConfigContext>
+            <AdaptiveCard payload={card} hostConfig={hostConfig} />
             <p className="text-muted-foreground align-bottom text-sm" style={{marginTop: "20px"}}>Disclaimer: Card is provided by resource {resource}, <b style={{fontWeight: 900}}>not txAdmin.</b></p>
         </div>
     );

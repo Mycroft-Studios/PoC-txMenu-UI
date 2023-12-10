@@ -4,7 +4,7 @@ import {Info} from "@/app/modelPages/Info";
 import {Ban} from "@/app/modelPages/Ban";
 import {History} from "@/app/modelPages/History";
 import {IDs} from "@/app/modelPages/IDs";
-import {AdaptiveCard} from "@/app/modelPages/adaptiveCard";
+import {AdaptiveCardPage} from "@/app/modelPages/adaptiveCard";
 
 const tabToRender = (tab: string) => {
     switch (tab) {
@@ -19,7 +19,7 @@ const tabToRender = (tab: string) => {
         case "IDs":
             return <IDs />
         default:
-            return <AdaptiveCard />
+            return <AdaptiveCardPage />
     }
 }
 
