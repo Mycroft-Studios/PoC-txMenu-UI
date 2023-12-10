@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 
 export function getSize(size: string) {
   switch(size) {
@@ -14,11 +14,13 @@ export function getSize(size: string) {
   }
 }
 
+
+
 export const reactDomRender = (
     reactElement: React.ReactElement
-  ): HTMLElement | undefined => {
-    const div = document.createElement("div");
-    ReactDOM.render(reactElement, div);
-    return div;
-  };
-  
+): HTMLElement | undefined => {
+  const div = document.createElement('div');
+  const root = createRoot(div);
+  root.render(reactElement);
+  return div;
+};

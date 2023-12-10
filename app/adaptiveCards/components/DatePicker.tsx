@@ -11,7 +11,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-export default (props: any) => {
+function DatePicker(props: any) {
   const { onChangeHandler } = props;
   const [value, setValue] = React.useState<Date>();
 
@@ -44,4 +44,6 @@ export default (props: any) => {
         </PopoverContent>
     </Popover>
   );
-};
+}
+
+export default DatePicker;
